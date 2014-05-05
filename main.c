@@ -53,8 +53,7 @@ int main(int argc, char *argv[]){
 				usage(EXIT_SUCCESS,stdout,argv[0]);
 				break;
 			case 'f'://input file, must have filename argument
-				input_filename
-				printf("TEST: %s",optarg);
+				input_filename = optarg;
 				break;
 			default:
 				usage(EXIT_FAILURE,stderr,argv[0]);
