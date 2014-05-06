@@ -138,22 +138,15 @@ if __name__ == '__main__':
     else:
           # Partial encryption (only the matches of input strings)
           count = text.count(keystr);
-          pw = GetPassphrase()
           for x in range(0, count):
             encrypted_keystr = AESencrypt(pw, keystr.strip())
             text = text.replace(keystr, '__[' + encrypted_keystr + ']__', 1)
           print(text.strip())
           sys.exit(0)
- 
 
   elif args.decrypt:
-    pw = ""
-    if args.password == None:
-      pw = GetPassphrase()
-    else:
-      pw = args.password
-    if args.strings == None:
-      pw = getpass.getpass('Type password: ' )
+   pw = getpass.getpass('Type password: ' )
+   if args.strings == None:
       decrypted = AESdecrypt(pw, text.strip())
       print(decrypted)
       sys.exit(0)
