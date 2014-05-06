@@ -45,7 +45,8 @@ def AESdecrypt(password, ciphertext, base64=False):
     BLOCK_SIZE = 16
     KEY_SIZE = 32
     MODE = AES.MODE_CBC
-     
+    
+    # assert ciphertext in hex
     if base64:
         import base64
         decodedCiphertext = base64.b64decode(ciphertext)
@@ -71,7 +72,7 @@ def PrintHelp():
     print ""
   
 def GetPassphrase():
-  pprompt = lambda: (getpass.getpass('Type password: ' ), getpass.getpass('Re-type password: '))
+  pprompt = lambda: (getpass.getpass('Type password: ' ), getpass.getpass('Type password again: '))
   p1, p2 = pprompt()
   count = 0
   while p1 != p2:
@@ -85,10 +86,9 @@ def GetPassphrase():
   return p1
   
 if __name__ == '__main__':
-  
   # these two will come from command
   password = 'password'
-  keystr = 'Deer Park, NY  11729	John Lettenberger'
+  keystr = 'two'
   # need command line parser to hadle
   # -e "str1" "str2" "str3"....       (Encrypt only chosen text)
   # -e -l "str1" "str2" "stre3"....   (Encrypt every line that has str[])
@@ -116,7 +116,7 @@ if __name__ == '__main__':
   if args.input == None:
    text = stdin.read()
 
-  if args.encrypt or (not args.encrypt and not args.decrypt):
+  if args.encrypt: # or (not args.encrypt and not args.decrypt):
     pw = GetPassphrase()
     encrypted = AESencrypt(pw, text.strip())
     print(encrypted)
@@ -127,20 +127,22 @@ if __name__ == '__main__':
     print(decrypted)
     sys.exit(0)
   
+  
+  # Partial encryption (only the matches of input strings)
   count = text.count(keystr);
+  pw = GetPassphrase()
   for x in range(0, count):
-    encrypted_keystr = AESencrypt(pw, keystr)
+    encrypted_keystr = AESencrypt(pw, keystr.strip())
     text = text.replace(keystr, '__[' + encrypted_keystr + ']__', 1)
+  print(text.strip())
   
-  print('\n\nPartially Encrypted:')
-  print(text)
   
+  # Partial decryption (only the matches of input strings)
   m = None
   m = re.search('__\[(.*?)\]__', text)
   while (m is not None):
-    decrypted_keystr = AESdecrypt(pw, m.group(1))
+    decrypted_keystr = AESdecrypt(pw, m.group(1).strip())
     text = text.replace('__['+m.group(1)+']__', decrypted_keystr, 1)
     m = re.search('__\[(.*?)\]__', text)
     
-  print('\nPartially Decrypted:')
-  print(text)
+  print(text.strip())
