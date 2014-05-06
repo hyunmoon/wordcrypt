@@ -67,11 +67,13 @@ if __name__ == '__main__':
   password = 'password'
   keystr = 'Deer Park, NY  11729	John Lettenberger'
   # need command line parser to hadle
-  # -e "str1" "str2" "stre3"....      (choose what to encrypt)
-  # -e -l "str1" "str2" "stre3"....   (encrypt every line that has str"
-  # -e -a (encrypt all)               (encrypt entire text)
-  # -d                                (decrypt entire text)
-  # -p PASSPHRASE                     (provide passphrase)
+  # -e "str1" "str2" "str3"....       (Encrypt only chosen text)
+  # -e -l "str1" "str2" "stre3"....   (Encrypt every line that has str[])
+  # -e -a (encrypt all)               (Encrypt entire text)
+  # -d                                (Decrypt entire text)
+  # -p PASSPHRASE                     (Provide passphrase)
+  #                                    If passhrase is empty, either
+  #                                    use it empty or prompt user 
   #
   # Order of switches:
   # -(e),d -p PASSPHRASE (-a,l)
