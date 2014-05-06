@@ -3,6 +3,7 @@ from Crypto import Random
 from Crypto.Cipher import AES
 from sys import stdin, stdout
 import fileinput
+import argparse
 
 # http://www.commx.ws/2013/10/aes-encryption-with-python/
 def encrypt(message, key=None, key_size=128):
@@ -30,6 +31,13 @@ def decrypt(ciphertext, key):
     return plaintext
 
 if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser(description = "Decrpyt or encrypt files or text")
+    parser.add_argument("-d","--decrypt", help="decrypt encypted text", action = "store_true");
+    parser.add_argument("-e","--encrypt", help="encrypt regular text", action = "store_true");
+    parser.add_argument("-i","--input", help="input file");
+
+    args = parser.parse_args()
     message = stdin.read()
     encrypted = encrypt(message.encode("utf-8"))
     print(encrypted, end="\n\n")
