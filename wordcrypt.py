@@ -84,7 +84,14 @@ def GetPassphrase():
     p1, p2 = pprompt()
     
   return p1
-  
+
+def printToWhere(filename, text):
+   if filename != None:
+     output_file = open(filename,"w") 
+     output_file.write(text)
+   else:
+
+
 if __name__ == '__main__':
   # these two will come from command
   password = 'password'
@@ -123,7 +130,7 @@ if __name__ == '__main__':
      except IOError:
         sys.stderr.write("Error: Input file \"{0}\" not found\n".format(args.input))
   	sys.exit(1)
-
+    
   if args.encrypt or (not args.encrypt and not args.decrypt):
     pw = ""
     if args.password == None:
