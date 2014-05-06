@@ -94,6 +94,7 @@ if __name__ == '__main__':
   parser.add_argument("-i","--input", help="input file to encrypt or decrypt")
   parser.add_argument("-p","--password", help="password for encryption and decryption")
 
+  lines = 1;
   args = parser.parse_args()
   text = ""
   if args.input == None:
@@ -106,7 +107,7 @@ if __name__ == '__main__':
         sys.stderr.write("Error: Input file \"{0}\" not found\n".format(args.input))
   	sys.exit(1)
   
-  # ENCRYPT
+  # ENCRYPT -------------------------------------------------
   if args.encrypt  or (not args.encrypt and not args.decrypt):
     pw = ""
     if args.password == None:
@@ -119,8 +120,21 @@ if __name__ == '__main__':
       text = text.replace(text, '__[' + encrypted_str + ']__', 1)
       print(text.strip())
       sys.exit(0)
+    # elif args.lines != None:
+    elif lines != 0:
+      # Encrypt entire lines that contain particular strings
+      nText = ""
+      strCt = len(args.strings)
+      for i in range(0, strCt):
+	keystr = args.strings[i].strip()
+	for line in text.splitlines():
+	  if keystr in line:
+	    encrypted_keystr = AESencrypt(pw, line)
+	    text = text.replace(line, '__[' + encrypted_keystr + ']__', 1)
+      print(text.strip())
+      sys.exit(0)
     else:
-      # Partial encryption (only the matches of input strings)
+      # Encrypt only the particular strings
       strCt = len(args.strings)
       for i in range(0, strCt):
 	keystr = args.strings[i].strip()
@@ -128,11 +142,10 @@ if __name__ == '__main__':
 	for x in range(0, numMatch):
 	  encrypted_keystr = AESencrypt(pw, keystr.strip())
 	  text = text.replace(keystr, '__[' + encrypted_keystr + ']__', 1)
-        
       print(text.strip())
       sys.exit(0)
 	
-  # DECRYPT
+  # DECRYPT -------------------------------------------------
   elif args.decrypt:
     pw = getpass.getpass('Type password: ' )
     m = re.search('__\[(.*?)\]__', text)
@@ -140,5 +153,5 @@ if __name__ == '__main__':
       decrypted_keystr = AESdecrypt(pw.strip(), m.group(1).strip())
       text = text.replace('__['+m.group(1)+']__', decrypted_keystr, 1)
       m = re.search('__\[(.*?)\]__', text)
-      print(text.strip())
-      sys.exit(0)
+    print(text.strip())
+    sys.exit(0)
