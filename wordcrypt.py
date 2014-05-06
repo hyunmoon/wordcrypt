@@ -73,12 +73,7 @@ def PrintHelp():
 def GetPassphrase():
   pprompt = lambda: (getpass.getpass('Type password: ' ), getpass.getpass('Re-type password: '))
   p1, p2 = pprompt()
-  count = 0
   while p1 != p2:
-    #count += 1
-    #if (count >= 5):
-      #print 'Error occured while obtaining password. Program exits.'
-      #sys.exit(1)
     print('Passwords do not match. Try again')
     p1, p2 = pprompt()
     
@@ -122,7 +117,7 @@ if __name__ == '__main__':
       pw = GetPassphrase()
     else:
       pw = args.password
- 
+    
     if args.strings == None:
       encrypted_str = AESencrypt(pw, text.strip())
       text = text.replace(text, '__[' + encrypted_str + ']__', 1)
@@ -130,7 +125,6 @@ if __name__ == '__main__':
     # elif args.lines != None:
     elif lines != 0:
       # Encrypt entire lines that contain particular strings
-      nText = ""
       strCt = len(args.strings)
       for i in range(0, strCt):
 	keystr = args.strings[i].strip()
