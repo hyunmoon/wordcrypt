@@ -3,6 +3,7 @@ from sys import stdin, stdout
 from Crypto.Cipher import AES
 import hashlib, os, re
 import argparse
+import sys
 
 def keygen(passphrase):
   SALT = "Go Hokies!"
@@ -81,26 +82,26 @@ if __name__ == '__main__':
  
   text = ""
   parser = argparse.ArgumentParser(description = "Decrpyt or encrypt files or text")
-  parser.add_argument("-d","--decrypt", help="decrypt encypted text", action = "store_true");
-  parser.add_argument("-e","--encrypt", help="encrypt strings in regular text");
-  parser.add_argument("-i","--input", help="input file to encrypt or decrypt");
-  parser.add_argument("-p","--password", help="password for encryption and decryption");
+  group = parser.add_mutually_exclusive_group()
+  group.add_argument("-d","--decrypt", help="decrypt encypted text", action = "store_true")
+  group.add_argument("-e","--encrypt",help="help encrypt entire input", action = "store_true")
+  parser.add_argument("-s","--strings", help="encrypt strings in regular text")
+  parser.add_argument("-i","--input", help="input file to encrypt or decrypt")
+  parser.add_argument("-p","--password", help="password for encryption and decryption")
 
   args = parser.parse_args()
 
-  #if args.input == None:
-  #  text = stdin.read()
-  #else:
-  #  return
-  if args.encrypt or (not args.encrypt and args.decrypt):
+  if args.input == None:
+   text = stdin.read()
+
+  if args.encrypt or (not args.encrypt and not args.decrypt):
     encrypted = AESencrypt(password, text)
-    print('\nFully Encrypted:')
     print(encrypted)
+    sys.exit(0)
   elif args.decrypt:
     decrypted = AESdecrypt(password, encrypted)
-    print('\nFully Decrypted:')
     print(decrypted)
-  
+    sys.exit(0)
   count = text.count(keystr);
   for x in range(0, count):
     encrypted_keystr = AESencrypt(password, keystr)
