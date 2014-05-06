@@ -62,7 +62,21 @@ def AESdecrypt(password, ciphertext, base64=False):
     return plaintext
 
 if __name__ == '__main__':
+  
+  # these two will come from command
   password = 'password'
+  keystr = 'Deer Park, NY  11729	John Lettenberger'
+  # need command line parser to hadle
+  # -e "str1" "str2" "stre3"....      (choose what to encrypt)
+  # -e -l "str1" "str2" "stre3"....   (encrypt every line that has str"
+  # -e -a (encrypt all)               (encrypt entire text)
+  # -d                                (decrypt entire text)
+  # -p PASSPHRASE                     (provide passphrase)
+  #
+  # Order of switches:
+  # -(e),d -p PASSPHRASE (-a,l)
+  # () : optional
+  
   text = stdin.read()
   encrypted = AESencrypt(password, text)
   print('\nFully Encrypted:')
@@ -71,8 +85,6 @@ if __name__ == '__main__':
   print('\nFully Decrypted:')
   print(decrypted)
   
-  
-  keystr = 'Deer Park, NY  11729	John Lettenberger'
   count = text.count(keystr);
   for x in range(0, count):
     encrypted_keystr = AESencrypt(password, keystr)
