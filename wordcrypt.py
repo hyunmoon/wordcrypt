@@ -93,6 +93,8 @@ if __name__ == '__main__':
 
   if args.input == None:
    text = stdin.read()
+  if args.password != None:
+   password = args.password
 
   if args.encrypt or (not args.encrypt and not args.decrypt):
     encrypted = AESencrypt(password, text)
