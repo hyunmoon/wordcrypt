@@ -2,6 +2,7 @@
 from Crypto import Random
 from Crypto.Cipher import AES
 from sys import stdin, stdout
+import fileinput
 
 # http://www.commx.ws/2013/10/aes-encryption-with-python/
 def encrypt(message, key=None, key_size=128):
@@ -29,8 +30,10 @@ def decrypt(ciphertext, key):
     return plaintext
 
 if __name__ == '__main__':
-    message = 'hello'
+    message = stdin.read()
     encrypted = encrypt(message.encode("utf-8"))
+    print(encrypted, end="\n\n")
+    
     decrypted = decrypt(*encrypted).decode("utf-8")
     print(decrypted)
  
