@@ -112,12 +112,17 @@ if __name__ == '__main__':
   group = parser.add_mutually_exclusive_group()
 
   group.add_argument("-d","--decrypt", help="decrypt encypted text", action = "store_true")
-  group.add_argument("-e","--encrypt",help="help encrypt entire input", action = "store_true")
+  group.add_argument("-e","--encrypt",help="encrypt entire input", action = "store_true")
 
-  parser.add_argument("-s","--strings", help="encrypt strings in regular text", nargs = "+")
+  group2 = parser.add_mutually_exclusive_group()
+  group2.add_argument("-s","--strings", help="encrypt strings in regular text", nargs = "+")
+  group2.add_argument("-l","--lines", help="encrypt entire lines in regular text containing argument strings", nargs = "+")
+
+  parser.add_argument("-o","--output", help="output file to encrypted or decrypted text")
   parser.add_argument("-i","--input", help="input file to encrypt or decrypt")
   parser.add_argument("-p","--password", help="password for encryption and decryption")
 
+  lines = 1;
   args = parser.parse_args()
   text = ""
   if args.input == None:
@@ -129,8 +134,8 @@ if __name__ == '__main__':
      except IOError:
         sys.stderr.write("Error: Input file \"{0}\" not found\n".format(args.input))
   	sys.exit(1)
- 	 
-  # ENCRYPT
+  
+  # ENCRYPT -------------------------------------------------
   if args.encrypt  or (not args.encrypt and not args.decrypt):
     pw = ""
     if args.password == None:
@@ -138,13 +143,21 @@ if __name__ == '__main__':
     else:
       pw = args.password
  
-    if args.strings == None:
+    if args.strings == None and args.lines == None:
       encrypted_str = AESencrypt(pw, text.strip())
       text = text.replace(text, '__[' + encrypted_str + ']__', 1)
-      print(text.strip())
-      sys.exit(0)
+    elif args.lines != None:
+      # Encrypt entire lines that contain particular strings
+      nText = ""
+      strCt = len(args.lines)
+      for i in range(0, strCt):
+	keystr = args.lines[i].strip()
+	for line in text.splitlines():
+	  if keystr in line:
+	    encrypted_keystr = AESencrypt(pw, line)
+	    text = text.replace(line, '__[' + encrypted_keystr + ']__', 1)
     else:
-      # Partial encryption (only the matches of input strings)
+      # Encrypt only the particular strings
       strCt = len(args.strings)
       for i in range(0, strCt):
 	keystr = args.strings[i].strip()
@@ -152,17 +165,24 @@ if __name__ == '__main__':
 	for x in range(0, numMatch):
 	  encrypted_keystr = AESencrypt(pw, keystr.strip())
 	  text = text.replace(keystr, '__[' + encrypted_keystr + ']__', 1)
-        
-      print(text.strip())
-      sys.exit(0)
-	
-  # DECRYPT
+  	
+  # DECRYPT -------------------------------------------------
   elif args.decrypt:
-    pw = getpass.getpass('Type password: ' )
+    if args.lines != None or args.strings != None:
+      print sys.stderr.write("Error: Cannot decrypt specific strings or lines")
+      sys.exit(1)
+    if args.password == None:
+      pw = getpass.getpass('Type password: ' )
+    else:
+      pw = args.password
     m = re.search('__\[(.*?)\]__', text)
     while (m is not None):
       decrypted_keystr = AESdecrypt(pw.strip(), m.group(1).strip())
       text = text.replace('__['+m.group(1)+']__', decrypted_keystr, 1)
       m = re.search('__\[(.*?)\]__', text)
+  if args.output == None:
     print(text.strip())
     sys.exit(0)
+  else:
+    output_file = open(args.output,'w')
+    output_file.write(text.strip())
