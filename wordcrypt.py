@@ -76,10 +76,6 @@ def GetPassphrase():
   p1, p2 = pprompt()
   count = 0
   while p1 != p2:
-    #count += 1
-    #if (count >= 5):
-      #print 'Error occured while obtaining password. Program exits.'
-      #sys.exit(1)
     print('Passwords do not match. Try again')
     p1, p2 = pprompt()
     
@@ -115,10 +111,10 @@ if __name__ == '__main__':
 
   if args.input == None:
     try:
-     text = stdin.read()
-
+      text = stdin.read()
+  
   if args.password != None:
-   password = args.password
+    password = args.password
 
   if args.encrypt:
     pw = GetPassphrase()
