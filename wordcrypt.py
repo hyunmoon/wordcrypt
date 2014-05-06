@@ -101,8 +101,7 @@ if __name__ == '__main__':
   # Order of switches:
   # -(e),d -p PASSPHRASE (-a,l)
   # () : optional
- 
-  text = ""
+
   parser = argparse.ArgumentParser(description = "Decrpyt or encrypt files or text")
   group = parser.add_mutually_exclusive_group()
   group.add_argument("-d","--decrypt", help="decrypt encypted text", action = "store_true")
@@ -113,6 +112,7 @@ if __name__ == '__main__':
 
   args = parser.parse_args()
 
+  text = ""
   if args.input == None:
    text = stdin.read()
 
