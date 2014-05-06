@@ -22,7 +22,7 @@ def AESencrypt(password, plaintext, base64=False):
      
     salt = os.urandom(SALT_LENGTH)
     iv = os.urandom(BLOCK_SIZE)
-     
+    
     paddingLength = 16 - (len(plaintext) % 16)
     paddedPlaintext = plaintext+chr(paddingLength)*paddingLength
     derivedKey = password
@@ -45,12 +45,12 @@ def AESdecrypt(password, ciphertext, base64=False):
     BLOCK_SIZE = 16
     KEY_SIZE = 32
     MODE = AES.MODE_CBC
-    
-    # assert ciphertext in hex
+     
     if base64:
         import base64
         decodedCiphertext = base64.b64decode(ciphertext)
     else:
+        # ciphertext = hex(ciphertext)
         decodedCiphertext = ciphertext.decode("hex")
     startIv = len(decodedCiphertext)-BLOCK_SIZE-SALT_LENGTH
     startSalt = len(decodedCiphertext)-SALT_LENGTH
@@ -72,7 +72,7 @@ def PrintHelp():
     print ""
   
 def GetPassphrase():
-  pprompt = lambda: (getpass.getpass('Type password: ' ), getpass.getpass('Type password again: '))
+  pprompt = lambda: (getpass.getpass('Type password: ' ), getpass.getpass('Re-type password: '))
   p1, p2 = pprompt()
   count = 0
   while p1 != p2:
@@ -116,17 +116,21 @@ if __name__ == '__main__':
   if args.input == None:
    text = stdin.read()
 
-  if args.encrypt: # or (not args.encrypt and not args.decrypt):
+  if args.encrypt or (not args.encrypt and not args.decrypt):
     pw = GetPassphrase()
-    encrypted = AESencrypt(pw, text.strip())
-    print(encrypted)
+    encrypted_str = AESencrypt(pw, text.strip())
+    text = text.replace(text, '__[' + encrypted_str + ']__', 1)
+    print(text.strip())
     sys.exit(0)
   elif args.decrypt:
     pw = getpass.getpass('Type password: ' )
-    decrypted = AESdecrypt(pw, text.strip())
-    print(decrypted)
+    m = re.search('__\[(.*?)\]__', text)
+    while (m is not None):
+      decrypted_keystr = AESdecrypt(pw.strip(), m.group(1).strip())
+      text = text.replace('__['+m.group(1)+']__', decrypted_keystr, 1)
+      m = re.search('__\[(.*?)\]__', text)
+    print(text.strip())
     sys.exit(0)
-  
   
   # Partial encryption (only the matches of input strings)
   count = text.count(keystr);
@@ -134,15 +138,4 @@ if __name__ == '__main__':
   for x in range(0, count):
     encrypted_keystr = AESencrypt(pw, keystr.strip())
     text = text.replace(keystr, '__[' + encrypted_keystr + ']__', 1)
-  print(text.strip())
-  
-  
-  # Partial decryption (only the matches of input strings)
-  m = None
-  m = re.search('__\[(.*?)\]__', text)
-  while (m is not None):
-    decrypted_keystr = AESdecrypt(pw, m.group(1).strip())
-    text = text.replace('__['+m.group(1)+']__', decrypted_keystr, 1)
-    m = re.search('__\[(.*?)\]__', text)
-    
   print(text.strip())
