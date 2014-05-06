@@ -18,7 +18,7 @@ int main(int argc, char *argv[]){
 	int opt;
 	char de_or_en = 'e';
 
-	char * filename;
+	char * input_filename;
 	char * endptr;
 
 	int dflag = 0;
@@ -60,7 +60,7 @@ int main(int argc, char *argv[]){
 				exit(1);
 		}
 	}
-
+	
 	printf("\n DONE");
 	
 }

@@ -1,10 +1,9 @@
 #!/usr/bin/env python2
-from sys import stdin, stdout
 from Crypto.Cipher import AES
-import hashlib, os, re
-import getpass
-import argparse
+from sys import stdin, stdout
 import sys
+import hashlib, os, re
+import getpass, argparse
 
 def keygen(passphrase):
   SALT = "Go Hokies!"
@@ -84,12 +83,21 @@ def GetPassphrase():
     p1, p2 = pprompt()
     
   return p1
-  
+
+def printToWhere(filename, text):
+   if filename != None:
+     output_file = open(filename,"w") 
+     output_file.write(text)
+
+
 if __name__ == '__main__':
-  parser = argparse.ArgumentParser(description = "Decrpyt or encrypt files or text")
+  
+  parser = argparse.ArgumentParser(description = "Decrpyt or encrypt text files. Omit -p if command history is logged")
   group = parser.add_mutually_exclusive_group()
+
   group.add_argument("-d","--decrypt", help="decrypt encypted text", action = "store_true")
   group.add_argument("-e","--encrypt",help="help encrypt entire input", action = "store_true")
+
   parser.add_argument("-s","--strings", help="encrypt strings in regular text", nargs = "+")
   parser.add_argument("-i","--input", help="input file to encrypt or decrypt")
   parser.add_argument("-p","--password", help="password for encryption and decryption")
@@ -97,6 +105,7 @@ if __name__ == '__main__':
   lines = 1;
   args = parser.parse_args()
   text = ""
+  pw = ""
   if args.input == None:
      text = stdin.read().strip()
   else:
@@ -109,7 +118,6 @@ if __name__ == '__main__':
   
   # ENCRYPT -------------------------------------------------
   if args.encrypt  or (not args.encrypt and not args.decrypt):
-    pw = ""
     if args.password == None:
       pw = GetPassphrase()
     else:
@@ -119,7 +127,6 @@ if __name__ == '__main__':
       encrypted_str = AESencrypt(pw, text.strip())
       text = text.replace(text, '__[' + encrypted_str + ']__', 1)
       print(text.strip())
-      sys.exit(0)
     # elif args.lines != None:
     elif lines != 0:
       # Encrypt entire lines that contain particular strings
@@ -132,7 +139,6 @@ if __name__ == '__main__':
 	    encrypted_keystr = AESencrypt(pw, line)
 	    text = text.replace(line, '__[' + encrypted_keystr + ']__', 1)
       print(text.strip())
-      sys.exit(0)
     else:
       # Encrypt only the particular strings
       strCt = len(args.strings)
@@ -143,15 +149,17 @@ if __name__ == '__main__':
 	  encrypted_keystr = AESencrypt(pw, keystr.strip())
 	  text = text.replace(keystr, '__[' + encrypted_keystr + ']__', 1)
       print(text.strip())
-      sys.exit(0)
 	
   # DECRYPT -------------------------------------------------
   elif args.decrypt:
-    pw = getpass.getpass('Type password: ' )
+    if args.password == None:
+      pw = getpass.getpass('Type password: ' )
+    else:
+      pw = args.password
     m = re.search('__\[(.*?)\]__', text)
     while (m is not None):
       decrypted_keystr = AESdecrypt(pw.strip(), m.group(1).strip())
       text = text.replace('__['+m.group(1)+']__', decrypted_keystr, 1)
       m = re.search('__\[(.*?)\]__', text)
     print(text.strip())
-    sys.exit(0)
+  sys.exit(0)
