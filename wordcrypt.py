@@ -2,6 +2,7 @@
 from sys import stdin, stdout
 from Crypto.Cipher import AES
 import hashlib, os, re
+import getpass
 import argparse
 import sys
 
@@ -63,7 +64,28 @@ def AESdecrypt(password, ciphertext, base64=False):
     plaintext = plaintextWithPadding[:-paddingLength]
     return plaintext
 
+def PrintHelp():
+    print ""
+    print "Usage: python wordcrypt.py [Option1] [] [File ...]\n"
+    print " -h  help"
+    print ""
+  
+def GetPassphrase():
+  pprompt = lambda: (getpass.getpass('Type password: ' ), getpass.getpass('Re-type password: '))
+  p1, p2 = pprompt()
+  count = 0
+  while p1 != p2:
+    #count += 1
+    #if (count >= 5):
+      #print 'Error occured while obtaining password. Program exits.'
+      #sys.exit(1)
+    print('Passwords do not match. Try again')
+    p1, p2 = pprompt()
+    
+  return p1
+  
 if __name__ == '__main__':
+  
   # these two will come from command
   password = 'password'
   keystr = 'Deer Park, NY  11729	John Lettenberger'
@@ -97,16 +119,19 @@ if __name__ == '__main__':
    password = args.password
 
   if args.encrypt or (not args.encrypt and not args.decrypt):
-    encrypted = AESencrypt(password, text)
+    pw = GetPassphrase()
+    encrypted = AESencrypt(pw, text.strip())
     print(encrypted)
     sys.exit(0)
   elif args.decrypt:
-    decrypted = AESdecrypt(password, encrypted)
+    pw = getpass.getpass('Type password: ' )
+    decrypted = AESdecrypt(pw, text.strip())
     print(decrypted)
     sys.exit(0)
+  
   count = text.count(keystr);
   for x in range(0, count):
-    encrypted_keystr = AESencrypt(password, keystr)
+    encrypted_keystr = AESencrypt(pw, keystr)
     text = text.replace(keystr, '__[' + encrypted_keystr + ']__', 1)
   
   print('\n\nPartially Encrypted:')
@@ -115,7 +140,7 @@ if __name__ == '__main__':
   m = None
   m = re.search('__\[(.*?)\]__', text)
   while (m is not None):
-    decrypted_keystr = AESdecrypt(password, m.group(1))
+    decrypted_keystr = AESdecrypt(pw, m.group(1))
     text = text.replace('__['+m.group(1)+']__', decrypted_keystr, 1)
     m = re.search('__\[(.*?)\]__', text)
     
