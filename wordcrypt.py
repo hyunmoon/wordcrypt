@@ -36,9 +36,13 @@ if __name__ == '__main__':
     parser.add_argument("-d","--decrypt", help="decrypt encypted text", action = "store_true");
     parser.add_argument("-e","--encrypt", help="encrypt regular text", action = "store_true");
     parser.add_argument("-i","--input", help="input file");
+    parser.add_argument("-p","--password", help="password for encryption and decryption");
 
     args = parser.parse_args()
-    message = stdin.read()
+
+    if args.input == None:
+        message = stdin.read()
+
     encrypted = encrypt(message.encode("utf-8"))
     print(encrypted, end="\n\n")
     
