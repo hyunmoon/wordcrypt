@@ -90,23 +90,22 @@ if __name__ == '__main__':
   group = parser.add_mutually_exclusive_group()
   group.add_argument("-d","--decrypt", help="decrypt encypted text", action = "store_true")
   group.add_argument("-e","--encrypt",help="help encrypt entire input", action = "store_true")
-  parser.add_argument("-s","--strings", help="encrypt strings in regular text")
+  parser.add_argument("-s","--strings", help="encrypt strings in regular text", nargs = "+")
   parser.add_argument("-i","--input", help="input file to encrypt or decrypt")
   parser.add_argument("-p","--password", help="password for encryption and decryption")
 
-  keystr = 'two'
   args = parser.parse_args()
   text = ""
   if args.input == None:
-     text = stdin.read()
+     text = stdin.read().strip()
   else:
      try:
        input_file = open(args.input, 'r')
-       text = input_file.read()
+       text = input_file.read().strip()
      except IOError:
         sys.stderr.write("Error: Input file \"{0}\" not found\n".format(args.input))
   	sys.exit(1)
-
+  
   # ENCRYPT
   if args.encrypt  or (not args.encrypt and not args.decrypt):
     pw = ""
@@ -122,13 +121,17 @@ if __name__ == '__main__':
       sys.exit(0)
     else:
       # Partial encryption (only the matches of input strings)
-      count = text.count(keystr);
-      pw = GetPassphrase()
-      for x in range(0, count):
-	encrypted_keystr = AESencrypt(pw, keystr.strip())
-	text = text.replace(keystr, '__[' + encrypted_keystr + ']__', 1)
-	print(text.strip())
-	sys.exit(0)
+      strCt = len(args.strings)
+      for i in range(0, strCt):
+	keystr = args.strings[i].strip()
+	numMatch = text.count(keystr);
+	for x in range(0, numMatch):
+	  encrypted_keystr = AESencrypt(pw, keystr.strip())
+	  text = text.replace(keystr, '__[' + encrypted_keystr + ']__', 1)
+        
+      print(text.strip())
+      sys.exit(0)
+	
   # DECRYPT
   elif args.decrypt:
     pw = getpass.getpass('Type password: ' )
