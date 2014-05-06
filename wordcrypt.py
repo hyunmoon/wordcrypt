@@ -107,18 +107,20 @@ if __name__ == '__main__':
   group = parser.add_mutually_exclusive_group()
   group.add_argument("-d","--decrypt", help="decrypt encypted text", action = "store_true")
   group.add_argument("-e","--encrypt",help="help encrypt entire input", action = "store_true")
-  parser.add_argument("-s","--strings", help="encrypt strings in regular text")
+  parser.add_argument("-s","--strings", help="encrypt strings in regular text", nargs = "+")
   parser.add_argument("-i","--input", help="input file to encrypt or decrypt")
   parser.add_argument("-p","--password", help="password for encryption and decryption")
 
   args = parser.parse_args()
 
   if args.input == None:
-   text = stdin.read()
+    try:
+     text = stdin.read()
+
   if args.password != None:
    password = args.password
 
-  if args.encrypt or (not args.encrypt and not args.decrypt):
+  if args.encrypt:
     pw = GetPassphrase()
     encrypted = AESencrypt(pw, text.strip())
     print(encrypted)
