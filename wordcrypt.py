@@ -9,6 +9,7 @@ def keygen(passphrase):
   key = hashlib.md5(passphrase.encode('utf-8')).hexdigest()
   return key
 
+# http://www.floyd.ch/?p=293
 def AESencrypt(password, plaintext, base64=False):
     SALT_LENGTH = 32
     DERIVATION_ROUNDS=1337
@@ -33,7 +34,8 @@ def AESencrypt(password, plaintext, base64=False):
         return base64.b64encode(ciphertext)
     else:
         return ciphertext.encode("hex")
- 
+
+# http://www.floyd.ch/?p=293
 def AESdecrypt(password, ciphertext, base64=False):
     SALT_LENGTH = 32
     DERIVATION_ROUNDS=1337
@@ -63,25 +65,28 @@ if __name__ == '__main__':
   password = 'password'
   text = stdin.read()
   encrypted = AESencrypt(password, text)
+  print('\nFully Encrypted:')
   print(encrypted)
   decrypted = AESdecrypt(password, encrypted)
+  print('\nFully Decrypted:')
   print(decrypted)
   
   
-  keystr = 'two'
+  keystr = 'Deer Park, NY  11729	John Lettenberger'
   count = text.count(keystr);
   for x in range(0, count):
     encrypted_keystr = AESencrypt(password, keystr)
-    text = text.replace('two', '__[' + encrypted_keystr + ']__', 1)
-    
+    text = text.replace(keystr, '__[' + encrypted_keystr + ']__', 1)
+  
+  print('\n\nPartially Encrypted:')
   print(text)
   
   m = None
   m = re.search('__\[(.*?)\]__', text)
-  print('Decrypt:')
   while (m is not None):
     decrypted_keystr = AESdecrypt(password, m.group(1))
     text = text.replace('__['+m.group(1)+']__', decrypted_keystr, 1)
     m = re.search('__\[(.*?)\]__', text)
     
+  print('\nPartially Decrypted:')
   print(text)
