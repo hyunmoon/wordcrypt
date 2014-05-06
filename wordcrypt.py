@@ -102,7 +102,7 @@ if __name__ == '__main__':
   # () : optional
  
   text = ""
-  parser = argparse.ArgumentParser(description = "Decrpyt or encrypt text files. Do not use -p and use password prompt instead if command history is sensitive")
+  parser = argparse.ArgumentParser(description = "Decrpyt or encrypt text files. Omit -p if command history is logged")
   group = parser.add_mutually_exclusive_group()
   group.add_argument("-d","--decrypt", help="decrypt encypted text", action = "store_true")
   group.add_argument("-e","--encrypt",help="help encrypt entire input", action = "store_true")
@@ -124,8 +124,7 @@ if __name__ == '__main__':
         sys.stderr.write("Error: Input file \"{0}\" not found\n".format(args.input))
   	sys.exit(1)
 
-
-  if args.encrypt  or (not args.encrypt and not args.decrypt):
+  if args.encrypt or (not args.encrypt and not args.decrypt):
     pw = ""
     if args.password == None:
       pw = GetPassphrase()
