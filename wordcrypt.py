@@ -86,9 +86,8 @@ if __name__ == '__main__':
   password = 'password'
   keystr = 'two'
   # need command line parser to hadle
-  # -e "str1" "str2" "str3"....       (Encrypt only chosen text)
-  # -e -l "str1" "str2" "stre3"....   (Encrypt every line that has str[])
-  # -e -a (encrypt all)               (Encrypt entire text)
+  # -e -s "str1" "str2" "stre3"....   (Encrypt every line that has str[])
+  # -e                                (Encrypt entire text)
   # -d                                (Decrypt entire text)
   # -p PASSPHRASE                     (Provide passphrase)
   #                                    If passhrase is empty, either
@@ -99,15 +98,18 @@ if __name__ == '__main__':
   # () : optional
  
   text = ""
-  parser = argparse.ArgumentParser(description = "Decrpyt or encrypt files or text")
+  parser = argparse.ArgumentParser(description = "Decrpyt or encrypt text files. Do not use -p and use password prompt instead if command history is sensitive")
   group = parser.add_mutually_exclusive_group()
   group.add_argument("-d","--decrypt", help="decrypt encypted text", action = "store_true")
   group.add_argument("-e","--encrypt",help="help encrypt entire input", action = "store_true")
-  parser.add_argument("-s","--strings", help="encrypt strings in regular text", nargs = "+")
-  parser.add_argument("-i","--input", help="input file to encrypt or decrypt")
+  parser.add_argument("-s","--strings", help="encrypt strings listed ", nargs = "+")
   parser.add_argument("-p","--password", help="password for encryption and decryption")
 
+  parser.add_argument("-i","--input", help="name input text file to be encrypted or decrypted")
+  parser.add_argument("-o","--output", help="name output text file containing decrypted or encrypted text")
+
   args = parser.parse_args()
+  text = ""
 
   if args.input == None:
     try:
@@ -138,4 +140,58 @@ if __name__ == '__main__':
   for x in range(0, count):
     encrypted_keystr = AESencrypt(pw, keystr.strip())
     text = text.replace(keystr, '__[' + encrypted_keystr + ']__', 1)
-  print(text.strip())
+    print(text.strip())
+    text = stdin.read()
+  else:
+     try:
+       input_file = open(args.input, 'r')
+       text = input_file.read()
+     except FileNotFoundError:
+        sys.stderr.write("Error: Input file not found")
+	sys.exit(1)
+  if args.encrypt  or (not args.encrypt and not args.decrypt):
+    pw = ""
+    if args.password == None:
+      pw = GetPassphrase()
+    else:
+      pw = args.password
+ 
+    if args.strings == None:
+      encrypted = AESencrypt(pw, text.strip())
+      print(encrypted)
+      sys.exit(0)
+    else:
+          # Partial encryption (only the matches of input strings)
+          count = text.count(keystr);
+          pw = GetPassphrase()
+          for x in range(0, count):
+            encrypted_keystr = AESencrypt(pw, keystr.strip())
+            text = text.replace(keystr, '__[' + encrypted_keystr + ']__', 1)
+          print(text.strip())
+          sys.exit(0)
+ 
+
+  elif args.decrypt:
+    pw = ""
+    if args.password == None:
+      pw = GetPassphrase()
+    else:
+      pw = args.password
+    if args.strings == None:
+      pw = getpass.getpass('Type password: ' )
+      decrypted = AESdecrypt(pw, text.strip())
+      print(decrypted)
+      sys.exit(0)
+    else: 
+      # Partial decryption (only the matches of input strings)
+      m = None
+      m = re.search('__\[(.*?)\]__', text)
+      while (m is not None):
+        decrypted_keystr = AESdecrypt(pw, m.group(1).strip())
+        text = text.replace('__['+m.group(1)+']__', decrypted_keystr, 1)
+        m = re.search('__\[(.*?)\]__', text)
+    
+      print(text.strip())
+      sys.exit(0)
+      #
+>>>>>>> upstream/master
