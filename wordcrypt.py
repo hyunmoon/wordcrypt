@@ -113,7 +113,6 @@ if __name__ == '__main__':
   parser.add_argument("-o","--output", help="name output text file containing decrypted or encrypted text")
 
   args = parser.parse_args()
-  text = ""
 
   if args.input == None:
      text = stdin.read()
@@ -121,9 +120,11 @@ if __name__ == '__main__':
      try:
        input_file = open(args.input, 'r')
        text = input_file.read()
-     except FileNotFoundError:
-        sys.stderr.write("Error: Input file not found")
-	sys.exit(1)
+     except IOError:
+        sys.stderr.write("Error: Input file \"{0}\" not found\n".format(args.input))
+  	sys.exit(1)
+
+
   if args.encrypt  or (not args.encrypt and not args.decrypt):
     pw = ""
     if args.password == None:
