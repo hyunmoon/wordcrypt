@@ -73,13 +73,12 @@ def PrintHelp():
 def GetPassphrase():
   pprompt = lambda: (getpass.getpass('Type password: ' ), getpass.getpass('Re-type password: '))
   p1, p2 = pprompt()
-  
   count = 0
   while p1 != p2:
-    count += 1
-    if (count >= 3):
-      print 'Please restart'
-      sys.exit(0)
+    #count += 1
+    #if (count >= 5):
+      #print 'Error occured while obtaining password. Program exits.'
+      #sys.exit(1)
     print('Passwords do not match. Try again')
     p1, p2 = pprompt()
     
@@ -118,17 +117,16 @@ if __name__ == '__main__':
    text = stdin.read()
 
   if args.encrypt or (not args.encrypt and not args.decrypt):
-    # When encrypting
     pw = GetPassphrase()
-    encrypted = AESencrypt(pw, text)
+    encrypted = AESencrypt(pw, text.strip())
     print(encrypted)
     sys.exit(0)
   elif args.decrypt:
-     # When decrypting
     pw = getpass.getpass('Type password: ' )
-    decrypted = AESdecrypt(pw, encrypted)
+    decrypted = AESdecrypt(pw, text.strip())
     print(decrypted)
     sys.exit(0)
+  
   count = text.count(keystr);
   for x in range(0, count):
     encrypted_keystr = AESencrypt(pw, keystr)
