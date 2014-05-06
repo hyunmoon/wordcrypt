@@ -89,11 +89,9 @@ def printToWhere(filename, text):
    if filename != None:
      output_file = open(filename,"w") 
      output_file.write(text)
-   else:
 
 
 if __name__ == '__main__':
-<<<<<<< HEAD
   # these two will come from command
   password = 'password'
   keystr = 'two'
@@ -111,12 +109,11 @@ if __name__ == '__main__':
  
   text = ""
   parser = argparse.ArgumentParser(description = "Decrpyt or encrypt text files. Omit -p if command history is logged")
-=======
-  parser = argparse.ArgumentParser(description = "Decrpyt or encrypt files or text")
->>>>>>> 6adbf31f4b1589e7a773888cb4e9afd0b76207e1
   group = parser.add_mutually_exclusive_group()
+
   group.add_argument("-d","--decrypt", help="decrypt encypted text", action = "store_true")
   group.add_argument("-e","--encrypt",help="help encrypt entire input", action = "store_true")
+
   parser.add_argument("-s","--strings", help="encrypt strings in regular text", nargs = "+")
   parser.add_argument("-i","--input", help="input file to encrypt or decrypt")
   parser.add_argument("-p","--password", help="password for encryption and decryption")
@@ -132,14 +129,9 @@ if __name__ == '__main__':
      except IOError:
         sys.stderr.write("Error: Input file \"{0}\" not found\n".format(args.input))
   	sys.exit(1)
-<<<<<<< HEAD
-    
-  if args.encrypt or (not args.encrypt and not args.decrypt):
-=======
-  
+ 	 
   # ENCRYPT
   if args.encrypt  or (not args.encrypt and not args.decrypt):
->>>>>>> 6adbf31f4b1589e7a773888cb4e9afd0b76207e1
     pw = ""
     if args.password == None:
       pw = GetPassphrase()
@@ -152,21 +144,6 @@ if __name__ == '__main__':
       print(text.strip())
       sys.exit(0)
     else:
-<<<<<<< HEAD
-          # Partial encryption (only the matches of input strings)
-          count = text.count(keystr);
-          for x in range(0, count):
-            encrypted_keystr = AESencrypt(pw, keystr.strip())
-            text = text.replace(keystr, '__[' + encrypted_keystr + ']__', 1)
-          print(text.strip())
-          sys.exit(0)
-
-  elif args.decrypt:
-   pw = getpass.getpass('Type password: ' )
-   if args.strings == None:
-      decrypted = AESdecrypt(pw, text.strip())
-      print(decrypted)
-=======
       # Partial encryption (only the matches of input strings)
       strCt = len(args.strings)
       for i in range(0, strCt):
@@ -177,7 +154,6 @@ if __name__ == '__main__':
 	  text = text.replace(keystr, '__[' + encrypted_keystr + ']__', 1)
         
       print(text.strip())
->>>>>>> 6adbf31f4b1589e7a773888cb4e9afd0b76207e1
       sys.exit(0)
 	
   # DECRYPT
@@ -188,5 +164,5 @@ if __name__ == '__main__':
       decrypted_keystr = AESdecrypt(pw.strip(), m.group(1).strip())
       text = text.replace('__['+m.group(1)+']__', decrypted_keystr, 1)
       m = re.search('__\[(.*?)\]__', text)
-      print(text.strip())
-      sys.exit(0)
+    print(text.strip())
+    sys.exit(0)
