@@ -7,13 +7,12 @@ It is capable of encrypting or decrypting only certain strings or lines in the t
 
 ## Required library
 In order to run wordcrypt, you need PyCrypto library.  
-Linux:
+Linux:  
     `$ sudo apt-get install python-crypto`
     
 Windows:  
     1. Go to http://www.voidspace.org.uk/python/modules.shtml#pycrypto  
-    2. Download either "PyCrypto 2.6 for Python 2.6 32bit" or "64bit"  
-    3. Run and install 
+    2. Download and install "PyCrypto 2.6 for Python 2.6 32bit" or "64bit"  
 
 ## Usage
 
@@ -27,17 +26,6 @@ Option:
     5. `-l : Encrypt the lines containing the specific string ex) -l "str1" "str2" "str3"`  
     6. `-i : Input file (if no -i switch, the program will read from the standard input)`  
     7. `-o : Outout file (if no -o switch, the program will write to the standard output)`  
-
-For example,  
-
-1. You have a confidential document and you only want to encrypt key pieces in the text  
-You can do:  
-	`python wordcrypt.py -s "James Bond", "May 7th, 2013" -i data.txt -o encrypted.txt`  
-
-2. You have a text file containing your club member's information and you want to encrypt their phone numbers and email addresses.`  
-You can do:  
-	`python wordcrypt.py -l "phone" "email" -i data.txt -o encrypted.txt` 
-	
 	
      
 ## Useful Commands:
