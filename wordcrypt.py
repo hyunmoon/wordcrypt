@@ -12,10 +12,9 @@ def AESencrypt(password, plaintext, base64=False):
     BLOCK_SIZE = 16
     KEY_SIZE = 32
     MODE = AES.MODE_CBC
-     
+    
     salt = os.urandom(SALT_LENGTH)
     iv = os.urandom(BLOCK_SIZE)
-    
     paddingLength = 16 - (len(plaintext) % 16)
     paddedPlaintext = plaintext+chr(paddingLength)*paddingLength
     derivedKey = password
@@ -63,7 +62,7 @@ def PrintHelp():
     print " -h  help"
     print ""
   
-def GetPassphrase():
+def GetPassword():
   pprompt = lambda: (getpass.getpass('Type password: ' ), getpass.getpass('Re-type password: '))
   p1, p2 = pprompt()
   while p1 != p2:
@@ -110,15 +109,14 @@ if __name__ == '__main__':
   # ENCRYPT -------------------------------------------------
   if args.encrypt  or (not args.encrypt and not args.decrypt):
     if args.password == None:
-      pw = GetPassphrase()
+      pw = GetPassword()
     else:
       pw = args.password
 
     if args.strings == None and args.lines == None:
       encrypted_str = AESencrypt(pw, text.strip())
       text = text.replace(text, '__[' + encrypted_str + ']__', 1)
-    elif args.lines != None:
-      # Encrypt entire lines that contain particular strings
+    elif args.lines != None: # Encrypt entire lines that contain particular strings
       nText = ""
       strCt = len(args.lines)
 
@@ -127,7 +125,7 @@ if __name__ == '__main__':
 	for line in text.splitlines():
 	  if keystr in line:
 	    encrypted_keystr = AESencrypt(pw, line)
-	    text = text.replace(line, '__[' + encrypted_keystr + ']__', 1)
+	    text = text.replace(line, '__[' + encrypted_keystr + ']__', 1) 
     else:
       # Encrypt only the particular strings
       strCt = len(args.strings)
