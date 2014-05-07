@@ -1,5 +1,4 @@
-ECE2524 SP14
-Final Project - WordCrypt  
+ECE2524 SP14 Final Project- WordCrypt  
 
 ## Introduction
 Wordcrypt is a simple yet powerful string encryption tool.  
@@ -50,7 +49,7 @@ But what if you want to encrypt only the key pieces of information?
 Wordcrypt uses AES-128 encryption algorithm which is known to be one of the safest  
 and strongest encryption algorithm.  
 Also, even if there are multiple occurences of strings, each strings will be  
-encrypted to different string so reader can not guess the word in it.  
+encrypted to different strings so the reader can't guess about them.  
 
 In this project, we tried to show some design philosopy of UNIX including:  
 
