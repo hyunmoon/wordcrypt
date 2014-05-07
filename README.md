@@ -8,9 +8,9 @@ It is capable of encrypting or decrypting only certain strings or lines in the t
 ## Required library
 In order to run wordcrypt, you need PyCrypto library.  
 Linux:
-    $ sudo apt-get install python-crypto
+    `$ sudo apt-get install python-crypto`
     
-Windows:
+Windows:  
     1. Go to http://www.voidspace.org.uk/python/modules.shtml#pycrypto  
     2. Download either "PyCrypto 2.6 for Python 2.6 32bit" or "64bit"  
     3. Run and install 
