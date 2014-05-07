@@ -50,10 +50,10 @@ You cna do:
 	python wordcrypt.py -l "phone" "email" -i data.txt -o encrypted.txt  
 
 Useful notes:  
-	To highlight the encrypted part, add the following at the end of command line after a space  
-    | grep '\_\_\[.*\]\_\_'  
+To highlight the encrypted part, add the following at the end of command line after a space  
+	| grep '\_\_\[.*\]\_\_'  
       
-	To save the result in clipboard, add the following at the end of the command line after a space  
+To save the result in clipboard, add the following at the end of the command line after a space  
 	| xsel -ib  
 	(This requires xsel. To install, type [ sudo apt-get install xsel ])  
 
