@@ -20,33 +20,33 @@ Windows:
 Usage: python wordcrypt.py [Option1] [] [File ...]  
 
 Option:  
-    1. -e : Encrypt (default)  
+    `1. -e : Encrypt (default)  
     2. -d : Decrypt  
     3. -p : Provide password (If no -p switch, user will be prompted to type password)  
     4. -s : Encrypt only the specific strings                ex) -s "str1" "str2" "str3"  
     5. -l : Encrypt the lines containing the specific string ex) -l "str1" "str2" "str3"  
     6. -i : Input file (if no -i switch, the program will read from the standard input)  
-    7. -o : Outout file (if no -o switch, the program will write to the standard output)  
+    7. -o : Outout file (if no -o switch, the program will write to the standard output) ` 
 
 For example,  
 
 1. You have a confidential document and you only want to encrypt key pieces in the text  
 You can do:  
-	python wordcrypt.py -s "James Bond", "May 7th, 2013" -i data.txt -o encrypted.txt  
+	`python wordcrypt.py -s "James Bond", "May 7th, 2013" -i data.txt -o encrypted.txt`  
 
-2. You have a text file containing your club member's information and you want to encrypt their phone numbers and email addresses.  
+2. You have a text file containing your club member's information and you want to encrypt their phone numbers and email addresses.`  
 You can do:  
-	python wordcrypt.py -l "phone" "email" -i data.txt -o encrypted.txt 
+	`python wordcrypt.py -l "phone" "email" -i data.txt -o encrypted.txt 
 	
 	
      
 ## Useful Commands:
 To highlight the encrypted part, add the following at the end of command line after a space
-    | grep '\\\_\\\_\\\[.*\\\]\\\_\\\_'  
+    `| grep '\\\_\\\_\\\[.*\\\]\\\_\\\_'`  
       
 To save the result in clipboard, add the following at the end of the command line after a space
-    | xsel -ib  
-    (This requires xsel. To install, type [ sudo apt-get install xsel ])  
+    `| xsel -ib`  
+    (This requires xsel. To install, type ` sudo apt-get install xsel `)  
 
 	
 ## Note:
