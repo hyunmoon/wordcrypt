@@ -30,7 +30,7 @@ Option:
      
 ## Useful Commands:
 To highlight the encrypted part, add the following at the end of command line after a space  
-    `| grep '\\\_\\\_\\\[.*\\\]\\\_\\\_'`  
+    `| grep '\_\_\[.*\\\]\_\_'`  
       
 To save the result in clipboard, add the following at the end of the command line after a space  
     `| xsel -ib`  
