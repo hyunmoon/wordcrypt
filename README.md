@@ -6,7 +6,7 @@ It is capable of encrypting or decrypting only certain strings or lines in the t
 
 ## Required Library
 In order to run wordcrypt, you need PyCrypto library.  
-Linux:  
+Linux - Ubuntu:  
     `$ sudo apt-get install python-crypto`
     
 Windows:  
