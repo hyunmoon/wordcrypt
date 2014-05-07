@@ -9,7 +9,7 @@ In order to run wordcrypt, you need PyCrypto library.
 To install PyCrypto Library,  
 
 Linux:  
-    sudo apt-get install python-crypto  
+    Run [ sudo apt-get install python-crypto ]  
 
 Windows:  
     1. Go to http://www.voidspace.org.uk/python/modules.shtml#pycrypto  
