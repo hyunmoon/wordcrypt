@@ -20,13 +20,13 @@ Windows:
 Usage: python wordcrypt.py [Option1] [] [File ...]  
 
 Option:  
-    `1. -e : Encrypt (default)  
-    2. -d : Decrypt  
-    3. -p : Provide password (If no -p switch, user will be prompted to type password)  
-    4. -s : Encrypt only the specific strings                ex) -s "str1" "str2" "str3"  
-    5. -l : Encrypt the lines containing the specific string ex) -l "str1" "str2" "str3"  
-    6. -i : Input file (if no -i switch, the program will read from the standard input)  
-    7. -o : Outout file (if no -o switch, the program will write to the standard output) ` 
+    `1. -e : Encrypt (default)`  
+    `2. -d : Decrypt`  
+    `3. -p : Provide password (If no -p switch, user will be prompted to type password)`  
+    `4. -s : Encrypt only the specific strings                ex) -s "str1" "str2" "str3"`  
+    `5. -l : Encrypt the lines containing the specific string ex) -l "str1" "str2" "str3"`  
+    `6. `-i : Input file (if no -i switch, the program will read from the standard input)`  
+    7. `-o : Outout file (if no -o switch, the program will write to the standard output)1  
 
 For example,  
 
@@ -41,10 +41,10 @@ You can do:
 	
      
 ## Useful Commands:
-To highlight the encrypted part, add the following at the end of command line after a space
+To highlight the encrypted part, add the following at the end of command line after a space  
     `| grep '\\\_\\\_\\\[.*\\\]\\\_\\\_'`  
       
-To save the result in clipboard, add the following at the end of the command line after a space
+To save the result in clipboard, add the following at the end of the command line after a space  
     `| xsel -ib`  
     (This requires xsel. To install, type ` sudo apt-get install xsel `)  
 
