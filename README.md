@@ -46,12 +46,12 @@ You can do:
 	python wordcrypt.py -s "James Bond", "May 7th, 2013" -i data.txt -o encrypted.txt  
 
 2. You have a text file containing your club member's information and you want to encrypt their phone numbers and email addresses.  
-You cna do:  
+You can do:  
 	python wordcrypt.py -l "phone" "email" -i data.txt -o encrypted.txt  
 
 Useful notes:  
 To highlight the encrypted part, add the following at the end of command line after a space  
-	| grep '\_\_\[.*\]\_\_'  
+	| grep '\\\_\\\_\\\[.*\\\]\\\_\\\_'  
       
 To save the result in clipboard, add the following at the end of the command line after a space  
 	| xsel -ib  
