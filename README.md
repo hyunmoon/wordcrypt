@@ -1,13 +1,17 @@
 ECE2524 SP14 Final Project- WordCrypt  
 
 ## Introduction
-Wordcrypt is a simple yet powerful string encryption tool.  
-It is capable of encrypting or decrypting only certain strings or lines in the text.  
+Wordcrypt is a simple yet powerful string encryption tool for text files.  
+It can encrypt or decrypt entire text files.
+It is also capable of encrypting or decrypting specific strings or lines in the text.  
 
 ## Required Library
-In order to run wordcrypt, you need PyCrypto library.  
-Linux - Ubuntu:  
+In order to run wordcrypt, you need PyCrypto library installed.  
+Linux - Ubuntu based:  
     `$ sudo apt-get install python-crypto`
+    
+Linux - RedHat based:  
+    `$ yum install python-crypto`
     
 Windows:  
     1. Go to http://www.voidspace.org.uk/python/modules.shtml#pycrypto  
@@ -18,8 +22,8 @@ Windows:
 Usage: python wordcrypt.py [Option1] [] [File ...]  
 
 Option:  
-    1. `-e : Encrypt (default)`  
-    2. `-d : Decrypt`  
+    1. `-e : Encrypt (program defaults to -e if user does not input -e or -d), mutually exclusive with -e`  
+    2. `-d : Decrypt, mutually exclusive with -e`  
     3. `-p : Provide password (If no -p switch, user will be prompted to type password)`  
     4. `-s : Encrypt only the specific strings                ex) -s "str1" "str2" "str3"`  
     5. `-l : Encrypt the lines containing the specific string ex) -l "str1" "str2" "str3"`  
