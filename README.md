@@ -1,24 +1,19 @@
 ECE2524 SP14
 Final Project - WordCrypt  
 
----
-title: wordcrypt project
----
-
 ## Introduction
-Wordcrypt is a simple yet powerful string encrypting tool. 
+Wordcrypt is a simple yet powerful string encrypting tool.  
 It is capable of encrypting or decrypting only certain strings or lines in the text 
 
 ## Required library
 In order to run wordcrypt, you need PyCrypto library.  
-Linux:  
+Linux:
     $ sudo apt-get install python-crypto
-
-Windows:__
+    
+Windows:
     1. Go to http://www.voidspace.org.uk/python/modules.shtml#pycrypto  
     2. Download either "PyCrypto 2.6 for Python 2.6 32bit" or "64bit"  
     3. Run and install 
-
 
 ## Usage
 
@@ -45,17 +40,16 @@ You can do:
 	
 	
      
-## Useful commands:__
-To highlight the encrypted part, add the following at the end of command line after a space  
-	| grep '\\\_\\\_\\\[.*\\\]\\\_\\\_'  
+## Useful Commands:
+To highlight the encrypted part, add the following at the end of command line after a space
+    | grep '\\\_\\\_\\\[.*\\\]\\\_\\\_'  
       
-To save the result in clipboard, add the following at the end of the command line after a space  
-	| xsel -ib  
-	(This requires xsel. To install, type [ sudo apt-get install xsel ])  
-
+To save the result in clipboard, add the following at the end of the command line after a space
+    | xsel -ib  
+    (This requires xsel. To install, type [ sudo apt-get install xsel ])  
 
 	
-## Note:__
+## Note:
 This project has been inspired by a scene in the movie "Inception"
 
 ![alt tag](https://lh6.googleusercontent.com/-0Y3geyRNkno/U2llsZB5_sI/AAAAAAAAAjE/g10k74Zp2hc/w587-h450-no/Resizedd_capture_001.png)
@@ -74,7 +68,7 @@ In this project, we tried to show some design philosopy of UNIX including:
 2. Rule of Least Surprise (simple command line interface)  
 3. Rule of Silence (it does not print unnecessary output)  
 
-## Contributor:_
+## Contributor:
 Contributor to this project:  
 hyunmoon@vt.edu  
 kpeng16@vt.edu  
