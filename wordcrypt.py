@@ -1,24 +1,21 @@
 #!/usr/bin/env python2
 from Crypto.Cipher import AES
 from sys import stdin, stdout
-import sys
-import hashlib, os, re
-import getpass, argparse
+import sys, hashlib, os
+import re, getpass, argparse
 
-def keygen(passphrase):
-  SALT = "Go Hokies!"
-  passphrase = SALT + passphrase
-  key = hashlib.md5(passphrase.encode('utf-8')).hexdigest()
-  return key
-
-# http://www.floyd.ch/?p=293
+# =================================
+# Encrypts text with AES-128
+# Key is generated from SHA-256
+# Dependencies: www.floyd.ch/?p=293
+# =================================
 def AESencrypt(password, plaintext, base64=False):
     SALT_LENGTH = 32
     DERIVATION_ROUNDS=1337
     BLOCK_SIZE = 16
     KEY_SIZE = 32
     MODE = AES.MODE_CBC
-     
+    
     salt = os.urandom(SALT_LENGTH)
     iv = os.urandom(BLOCK_SIZE)
     
@@ -37,19 +34,21 @@ def AESencrypt(password, plaintext, base64=False):
     else:
         return ciphertext.encode("hex")
 
-# http://www.floyd.ch/?p=293
+# =================================
+# Decrypts the encrypted text
+# Dependencies: www.floyd.ch/?p=293
+# =================================
 def AESdecrypt(password, ciphertext, base64=False):
     SALT_LENGTH = 32
     DERIVATION_ROUNDS=1337
     BLOCK_SIZE = 16
     KEY_SIZE = 32
     MODE = AES.MODE_CBC
-     
+    
     if base64:
         import base64
         decodedCiphertext = base64.b64decode(ciphertext)
     else:
-        # ciphertext = hex(ciphertext)
         decodedCiphertext = ciphertext.decode("hex")
     startIv = len(decodedCiphertext)-BLOCK_SIZE-SALT_LENGTH
     startSalt = len(decodedCiphertext)-SALT_LENGTH
@@ -64,13 +63,19 @@ def AESdecrypt(password, ciphertext, base64=False):
     plaintext = plaintextWithPadding[:-paddingLength]
     return plaintext
 
+# =================================
+# Prints usage and help
+# =================================
 def PrintHelp():
     print ""
     print "Usage: python wordcrypt.py [Option1] [] [File ...]\n"
     print " -h  help"
     print ""
-  
-def GetPassphrase():
+
+# =================================
+# Decrypts the encrypted text
+# =================================
+def GetPassword():
   pprompt = lambda: (getpass.getpass('Type password: ' ), getpass.getpass('Re-type password: '))
   p1, p2 = pprompt()
   while p1 != p2:
@@ -79,14 +84,10 @@ def GetPassphrase():
     
   return p1
 
-def printToWhere(filename, text):
-   if filename != None:
-     output_file = open(filename,"w") 
-     output_file.write(text)
-
-
+# =================================
+# main
+# =================================
 if __name__ == '__main__':
-  
   parser = argparse.ArgumentParser(description = "Decrpyt or encrypt text files. Omit -p if command history is logged")
   group = parser.add_mutually_exclusive_group()
 
@@ -101,12 +102,13 @@ if __name__ == '__main__':
   parser.add_argument("-i","--input", help="input file to encrypt or decrypt")
   parser.add_argument("-p","--password", help="password for encryption and decryption")
 
-  lines = 1;
   args = parser.parse_args()
   text = ""
   pw = ""
+  
+  # if no input files, read from stdin
   if args.input == None:
-     text = stdin.read().strip()
+     text = stdin.read()
   else:
      try:
        input_file = open(args.input, 'r')
@@ -117,15 +119,22 @@ if __name__ == '__main__':
   
   # ENCRYPT -------------------------------------------------
   if args.encrypt  or (not args.encrypt and not args.decrypt):
+    # Take password from prompt or argument
     if args.password == None:
-      pw = GetPassphrase()
+      pw = GetPassword()
     else:
       pw = args.password
+<<<<<<< HEAD
+=======
+    
+    # Encrypt the entire text
+>>>>>>> upstream/master
     if args.strings == None and args.lines == None:
       encrypted_str = AESencrypt(pw, text.strip())
       text = text.replace(text, '__[' + encrypted_str + ']__', 1)
+      
+    # Encrypt the lines that contain specific strings
     elif args.lines != None:
-      # Encrypt entire lines that contain particular strings
       nText = ""
       strCt = len(args.lines)
       for i in range(0, strCt):
@@ -133,9 +142,14 @@ if __name__ == '__main__':
 	for line in text.splitlines():
 	  if keystr in line:
 	    encrypted_keystr = AESencrypt(pw, line)
+<<<<<<< HEAD
 	    text = text.replace(line, '__[' + encrypted_keystr + ']__', 1)
+=======
+	    text = text.replace(line, '__[' + encrypted_keystr + ']__', 1) 
+    
+    # Encrypt only the specific strings
+>>>>>>> upstream/master
     else:
-      # Encrypt only the particular strings
       strCt = len(args.strings)
       for i in range(0, strCt):
 	keystr = args.strings[i].strip()
@@ -143,25 +157,48 @@ if __name__ == '__main__':
 	for x in range(0, numMatch):
 	  encrypted_keystr = AESencrypt(pw, keystr.strip())
 	  text = text.replace(keystr, '__[' + encrypted_keystr + ']__', 1)
+<<<<<<< HEAD
   # DECRYPT -------------------------------------------------
+=======
+	
+  # DECRYPT -----------------------------------------------
+>>>>>>> upstream/master
   elif args.decrypt:
+    # Prevents illegal use of command line switch
     if args.lines != None or args.strings != None:
-      print sys.stderr.write("Error: Cannot decrypt specific strings or lines")
+      print sys.stderr.write("Error: Cannot decrypt specific strings or lines\n")
       sys.exit(1)
+<<<<<<< HEAD
+=======
+    
+    # Take password from prompt or argument
+>>>>>>> upstream/master
     if args.password == None:
       pw = getpass.getpass('Type password: ' )
     else:
       pw = args.password
+    
+    # Searches and decrypts encrypted text
     m = re.search('__\[(.*?)\]__', text)
     while (m is not None):
-      decrypted_keystr = AESdecrypt(pw.strip(), m.group(1).strip())
+      try:
+	decrypted_keystr = AESdecrypt(pw.strip(), m.group(1).strip())
+      except TypeError:
+	# if the encrypted data has been damaged
+	decrypted_keystr = '[ERROR_DAMAGED_DATA]'
       text = text.replace('__['+m.group(1)+']__', decrypted_keystr, 1)
       m = re.search('__\[(.*?)\]__', text)
+  
+  # Output to stdout or file
   if args.output == None:
     print(text.strip())
     sys.exit(0)
   else:
     output_file = open(args.output,'w')
+<<<<<<< HEAD
     output_file.write(text.strip())
     sys.exit(0)
 
+=======
+    output_file.write(text)
+>>>>>>> upstream/master
