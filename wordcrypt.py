@@ -1,5 +1,5 @@
 #!/usr/bin/env python2
-from Crypto.Cipher import AES # www.dlitz.net/software/pycrypto
+from Crypto.Cipher import AES
 from sys import stdin, stdout
 import sys
 import hashlib, os, re
@@ -78,7 +78,6 @@ def printToWhere(filename, text):
 
 
 if __name__ == '__main__':
-  
   parser = argparse.ArgumentParser(description = "Decrpyt or encrypt text files. Omit -p if command history is logged")
   group = parser.add_mutually_exclusive_group()
 
