@@ -1,5 +1,5 @@
 #!/usr/bin/env python2
-from Crypto.Cipher import AES
+from Crypto.Cipher import AES # www.dlitz.net/software/pycrypto
 from sys import stdin, stdout
 import sys
 import hashlib, os, re
@@ -38,7 +38,7 @@ def AESdecrypt(password, ciphertext, base64=False):
     BLOCK_SIZE = 16
     KEY_SIZE = 32
     MODE = AES.MODE_CBC
-     
+    
     if base64:
         import base64
         decodedCiphertext = base64.b64decode(ciphertext)
@@ -141,7 +141,7 @@ if __name__ == '__main__':
   # DECRYPT -------------------------------------------------
   elif args.decrypt:
     if args.lines != None or args.strings != None:
-      print sys.stderr.write("Error: Cannot decrypt specific strings or lines")
+      print sys.stderr.write("Error: Cannot decrypt specific strings or lines\n")
       sys.exit(1)
     if args.password == None:
       pw = getpass.getpass('Type password: ' )
@@ -149,9 +149,13 @@ if __name__ == '__main__':
       pw = args.password
     m = re.search('__\[(.*?)\]__', text)
     while (m is not None):
-      decrypted_keystr = AESdecrypt(pw.strip(), m.group(1).strip())
+      try:
+	decrypted_keystr = AESdecrypt(pw.strip(), m.group(1).strip())
+      except TypeError:
+	decrypted_keystr = '[ERROR_DAMAGED_DATA]'
       text = text.replace('__['+m.group(1)+']__', decrypted_keystr, 1)
       m = re.search('__\[(.*?)\]__', text)
+      
   if args.output == None:
     print(text.strip())
     sys.exit(0)
