@@ -1,11 +1,11 @@
 ECE2524 SP14
-Final Project - WordCrypt
+Final Project - WordCrypt  
 
-Wordcrypt takes a file or a stream of text and either encrypts it or decrypts it.
-It is also capable of encrypting only the certain strings in the text or the entire lines that contains the string.
+Wordcrypt takes a file or a stream of text and either encrypts it or decrypts it.  
+It is also capable of encrypting only the certain strings in the text or the entire lines that contains the string.  
 
-[Required Library]
-In order to run wordcrypt, you need PyCrypto library.
+[Required Library]  
+In order to run wordcrypt, you need PyCrypto library.  
 To install PyCrypto Library,
 
 Linux:
