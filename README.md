@@ -22,7 +22,7 @@ Windows:
 Usage: python wordcrypt.py [Option1] [] [File ...]  
 
 Option:  
-    1. `-e : Encrypt (program defaults to -e if user does not input -e or -d), mutually exclusive with -e`  
+    1. `-e : Encrypt (program defaults to -e if user does not input -e or -d), mutually exclusive with -d`  
     2. `-d : Decrypt, mutually exclusive with -e`  
     3. `-p : Provide password (If no -p switch, user will be prompted to type password)`  
     4. `-s : Encrypt only the specific strings                ex) -s "str1" "str2" "str3"`  

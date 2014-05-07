@@ -73,7 +73,7 @@ def PrintHelp():
     print ""
 
 # =================================
-# Decrypts the encrypted text
+# Gets password from prompt
 # =================================
 def GetPassword():
   pprompt = lambda: (getpass.getpass('Type password: ' ), getpass.getpass('Re-type password: '))
@@ -183,4 +183,3 @@ if __name__ == '__main__':
     output_file = open(args.output,'w')
     output_file.write(text.strip())
     sys.exit(0)
-
