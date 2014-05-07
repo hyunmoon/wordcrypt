@@ -58,8 +58,7 @@ encrypted to different strings so the reader can't guess about them.
 In this project, we tried to show some design philosopy of UNIX including:  
 
 1. Rule of Composition (can interact with other programs through pipe)  
-2. Rule of Least Surprise (simple command line interface)  
-3. Rule of Silence (does not print unnecessary output)  
+2. Rule of Silence (does not print unnecessary output)  
 
 ## Contributor:
 Contributors to this project:  
