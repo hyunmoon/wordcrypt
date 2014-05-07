@@ -11,7 +11,7 @@ Linux - Ubuntu based:
     `$ sudo apt-get install python-crypto`
     
 Linux - RedHat based:  
-    `$ yum install python-crypto`
+    `$ sudo yum install python-crypto`
     
 Windows:  
     1. Go to http://www.voidspace.org.uk/python/modules.shtml#pycrypto  
@@ -62,6 +62,6 @@ In this project, we tried to show some design philosopy of UNIX including:
 3. Rule of Silence (does not print unnecessary output)  
 
 ## Contributor:
-Contributor to this project:  
+Contributors to this project:  
 hyunmoon@vt.edu  
-kpeng16@vt.edu  
+kpeng16@vt.edu (Fork:https://github.com/PengK/wordcrypt-1)  

@@ -124,11 +124,8 @@ if __name__ == '__main__':
       pw = GetPassword()
     else:
       pw = args.password
-<<<<<<< HEAD
-=======
     
     # Encrypt the entire text
->>>>>>> upstream/master
     if args.strings == None and args.lines == None:
       encrypted_str = AESencrypt(pw, text.strip())
       text = text.replace(text, '__[' + encrypted_str + ']__', 1)
@@ -142,13 +139,9 @@ if __name__ == '__main__':
 	for line in text.splitlines():
 	  if keystr in line:
 	    encrypted_keystr = AESencrypt(pw, line)
-<<<<<<< HEAD
-	    text = text.replace(line, '__[' + encrypted_keystr + ']__', 1)
-=======
 	    text = text.replace(line, '__[' + encrypted_keystr + ']__', 1) 
     
     # Encrypt only the specific strings
->>>>>>> upstream/master
     else:
       strCt = len(args.strings)
       for i in range(0, strCt):
@@ -157,22 +150,15 @@ if __name__ == '__main__':
 	for x in range(0, numMatch):
 	  encrypted_keystr = AESencrypt(pw, keystr.strip())
 	  text = text.replace(keystr, '__[' + encrypted_keystr + ']__', 1)
-<<<<<<< HEAD
-  # DECRYPT -------------------------------------------------
-=======
 	
   # DECRYPT -----------------------------------------------
->>>>>>> upstream/master
   elif args.decrypt:
     # Prevents illegal use of command line switch
     if args.lines != None or args.strings != None:
       print sys.stderr.write("Error: Cannot decrypt specific strings or lines\n")
       sys.exit(1)
-<<<<<<< HEAD
-=======
     
     # Take password from prompt or argument
->>>>>>> upstream/master
     if args.password == None:
       pw = getpass.getpass('Type password: ' )
     else:
@@ -195,10 +181,6 @@ if __name__ == '__main__':
     sys.exit(0)
   else:
     output_file = open(args.output,'w')
-<<<<<<< HEAD
     output_file.write(text.strip())
     sys.exit(0)
 
-=======
-    output_file.write(text)
->>>>>>> upstream/master
