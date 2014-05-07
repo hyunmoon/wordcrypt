@@ -1,10 +1,9 @@
 #!/usr/bin/env python2
-from sys import stdin, stdout
 from Crypto.Cipher import AES
-import hashlib, os, re
-import getpass
-import argparse
+from sys import stdin, stdout
 import sys
+import hashlib, os, re
+import getpass, argparse
 
 def keygen(passphrase):
   SALT = "Go Hokies!"
@@ -74,12 +73,7 @@ def PrintHelp():
 def GetPassphrase():
   pprompt = lambda: (getpass.getpass('Type password: ' ), getpass.getpass('Re-type password: '))
   p1, p2 = pprompt()
-  count = 0
   while p1 != p2:
-    #count += 1
-    #if (count >= 5):
-      #print 'Error occured while obtaining password. Program exits.'
-      #sys.exit(1)
     print('Passwords do not match. Try again')
     p1, p2 = pprompt()
     
@@ -92,22 +86,7 @@ def printToWhere(filename, text):
 
 
 if __name__ == '__main__':
-  # these two will come from command
-  password = 'password'
-  keystr = 'two'
-  # need command line parser to hadle
-  # -e -s "str1" "str2" "stre3"....   (Encrypt every line that has str[])
-  # -e                                (Encrypt entire text)
-  # -d                                (Decrypt entire text)
-  # -p PASSPHRASE                     (Provide passphrase)
-  #                                    If passhrase is empty, either
-  #                                    use it empty or prompt user 
-  #
-  # Order of switches:
-  # -(e),d -p PASSPHRASE (-a,l)
-  # () : optional
- 
-  text = ""
+  
   parser = argparse.ArgumentParser(description = "Decrpyt or encrypt text files. Omit -p if command history is logged")
   group = parser.add_mutually_exclusive_group()
 
@@ -125,6 +104,7 @@ if __name__ == '__main__':
   lines = 1;
   args = parser.parse_args()
   text = ""
+  pw = ""
   if args.input == None:
      text = stdin.read().strip()
   else:
@@ -137,12 +117,10 @@ if __name__ == '__main__':
   
   # ENCRYPT -------------------------------------------------
   if args.encrypt  or (not args.encrypt and not args.decrypt):
-    pw = ""
     if args.password == None:
       pw = GetPassphrase()
     else:
       pw = args.password
- 
     if args.strings == None and args.lines == None:
       encrypted_str = AESencrypt(pw, text.strip())
       text = text.replace(text, '__[' + encrypted_str + ']__', 1)
@@ -165,7 +143,6 @@ if __name__ == '__main__':
 	for x in range(0, numMatch):
 	  encrypted_keystr = AESencrypt(pw, keystr.strip())
 	  text = text.replace(keystr, '__[' + encrypted_keystr + ']__', 1)
-  	
   # DECRYPT -------------------------------------------------
   elif args.decrypt:
     if args.lines != None or args.strings != None:
@@ -186,3 +163,5 @@ if __name__ == '__main__':
   else:
     output_file = open(args.output,'w')
     output_file.write(text.strip())
+    sys.exit(0)
+
