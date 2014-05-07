@@ -13,4 +13,9 @@ kpeng16@vt.edu
 
 
 Note:
-grep '\_\_\[.*\]\_\_'     <-- Highlights only the encrypted part
+| grep '\_\_\[.*\]\_\_'     <-- Add this to highlight encrypted text
+| xsel -ib                  <-- Or add this to save the result in Clipboard
+
+
+Image:
+![alt tag](https://lh6.googleusercontent.com/-0Y3geyRNkno/U2llsZB5_sI/AAAAAAAAAjE/g10k74Zp2hc/w587-h450-no/Resizedd_capture_001.png)
