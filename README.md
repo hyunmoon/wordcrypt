@@ -3,9 +3,9 @@ Final Project - WordCrypt
 
 ## Introduction
 Wordcrypt is a simple yet powerful string encrypting tool.  
-It is capable of encrypting or decrypting only certain strings or lines in the text 
+It is capable of encrypting or decrypting only certain strings or lines in the text.  
 
-## Required library
+## Required Library
 In order to run wordcrypt, you need PyCrypto library.  
 Linux:  
     `$ sudo apt-get install python-crypto`
@@ -27,6 +27,7 @@ Option:
     6. `-i : Input file (if no -i switch, the program will read from the standard input)`  
     7. `-o : Outout file (if no -o switch, the program will write to the standard output)`  
 	
+     
      
 ## Useful Commands:
 To highlight the encrypted part, add the following at the end of command line after a space  
