@@ -51,8 +51,7 @@ To save the result in clipboard, add the following at the end of the command lin
     
 It requires installation of xsel. To install,  
 Linux - Ubuntu based:  
-    `$ sudo apt-get install xsel`
-    
+    `$ sudo apt-get install xsel`    
 Linux - RedHat based:  
     `$ sudo yum install xsel`
 
