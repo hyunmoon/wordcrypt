@@ -1,6 +1,6 @@
-ECE2524 SP14 Final Project- WordCrypt  
+# Wordcrypt - ECE2524 Final Project
 
-## Introduction
+### Introduction
 Wordcrypt is a simple yet powerful string encryption tool for text files.  
 It can encrypt or decrypt some specific words, lines or the entire text in a text file.  
 
@@ -10,7 +10,7 @@ This project has been inspired by a scene in the movie "Inception"
 Wordcrypt uses AES-128 encryption algorithm which is known to be one of the safest  
 and strongest way to encrypt. It will come handy when maintaining a confidential document.
 
-## Requirement
+### Requirement
 In order to run wordcrypt, you need Python v2.x and PyCrypto library installed.  
 To install PyCrypto libarary,  
 Linux - Ubuntu based:  
