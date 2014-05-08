@@ -7,7 +7,7 @@ It is also capable of encrypting or decrypting specific strings or lines in the 
 
 ## Requirement
 In order to run wordcrypt, you need Python v2.x and PyCrypto library installed.  
-To install PyCrypto libarary,
+To install PyCrypto libarary,  
 Linux - Ubuntu based:  
     `$ sudo apt-get install python-crypto`
     
