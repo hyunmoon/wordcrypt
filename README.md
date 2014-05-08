@@ -8,7 +8,7 @@ This project has been inspired by a scene in the movie "Inception"
 ![alt tag](https://lh6.googleusercontent.com/-0Y3geyRNkno/U2llsZB5_sI/AAAAAAAAAjE/g10k74Zp2hc/w587-h450-no/Resizedd_capture_001.png)
 
 Wordcrypt uses AES-128 encryption algorithm which is known to be one of the safest  
-and strongest way to encrypt data. It will come handy when maintaining a confidential document.
+and strongest way to encrypt. It will come handy when maintaining a confidential document.
 
 ## Requirement
 In order to run wordcrypt, you need Python v2.x and PyCrypto library installed.  
@@ -32,12 +32,12 @@ Option:
     2. `-d : Decrypt, mutually exclusive with -e`  
     3. `-p : Provide password (If no -p switch, user will be prompted to type password)`  
     4. `-s : Encrypt only the specific strings                ex) -s "str1" "str2" "str3"`  
-    5. `-l : Encrypt the lines containing the specific string ex) -l "str1" "str2" "str3"`  
+    5. `-l : Encrypt the lines containing the specific strings ex) -l "str1" "str2" "str3"`  
     6. `-i : Input file (if no -i switch, the program will read from the standard input)`  
     7. `-o : Outout file (if no -o switch, the program will write to the standard output)`  
 
     
-For Example,  
+For example,  
 If you would like to encrypt some specific phone numbers contained in a text file you can do:  
 `python wordcrypt.py -s "540-9876-5432" "571-1111-2222" -i sample.txt`
 
