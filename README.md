@@ -1,6 +1,6 @@
 ECE2524 SP14 Final Project- WordCrypt  
 
-## Introduction:
+## Introduction
 Wordcrypt is a simple yet powerful string encryption tool for text files.  
 It can encrypt or decrypt entire text files.
 It is also capable of encrypting or decrypting specific strings or lines in the text.  
@@ -33,7 +33,7 @@ Option:
 	
      
      
-## Useful Commands:
+## Useful Commands
 To highlight the encrypted part, add the following at the end of command line after a space  
     `| grep '\_\_\[.*\]\_\_'`  
       
@@ -42,7 +42,7 @@ To save the result in clipboard, add the following at the end of the command lin
     (This requires xsel. To install, type ` sudo apt-get install xsel `)  
 
 	
-## Description:
+## Description
 This project has been inspired by a scene in the movie "Inception"
 
 ![alt tag](https://lh6.googleusercontent.com/-0Y3geyRNkno/U2llsZB5_sI/AAAAAAAAAjE/g10k74Zp2hc/w587-h450-no/Resizedd_capture_001.png)
@@ -61,7 +61,7 @@ In this project, we tried to show some design philosopy of UNIX including:
 1. Rule of Composition (can interact with other programs through pipe)  
 2. Rule of Silence (does not print unnecessary output)  
 
-## Contributor:
+## Contributor
 Contributors to this project:  
 hyunmoon@vt.edu  
 kpeng16@vt.edu (Fork:https://github.com/PengK/wordcrypt-1)  
