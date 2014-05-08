@@ -1,4 +1,4 @@
-# WordCrypt - ece2524 final project
+## WordCrypt - ECE2524 Final Project
 
 Wordcrypt is a simple yet powerful string encryption tool for text files.  
 It can encrypt or decrypt some specific words, lines or the entire text in a text file.  
@@ -8,6 +8,7 @@ This project has been inspired by a scene in the movie "Inception"
 
 Wordcrypt uses AES-128 encryption algorithm which is known to be one of the safest  
 and strongest way to encrypt. It will come handy when maintaining a confidential document.
+
 ---
 
 ## Requirement
