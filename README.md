@@ -36,6 +36,7 @@ Option:
     6. `-i : Input file (if no -i switch, the program will read from the standard input)`  
     7. `-o : Outout file (if no -o switch, the program will write to the standard output)`  
 
+    
 For Example,  
 If you would like to encrypt some specific phone numbers contained in a text file you can do:  
 `python wordcrypt.py -s "540-9876-5432" "571-1111-2222" -i sample.txt`
@@ -45,13 +46,12 @@ If you would like to encrypt every line that contains phone numbers you can do:
 
 
 ## Useful Commands
-To highlight the encrypted part, add the following at the end of command line after a space  
-    `| grep '\_\_\[.*\]\_\_'`  
-      
 To save the result in clipboard, add the following at the end of the command line after a space  
     `| xsel -ib`  
     (This requires xsel. To install, type ` sudo apt-get install xsel `)  
-
+To check the encrypted strings, add the following at the end of command line after a space  
+    `| grep '\_\_\[.*\]\_\_'`  
+      
 	
 ## Design Philosophy
 
