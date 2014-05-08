@@ -65,7 +65,7 @@ To check the encrypted strings, add the following at the end of command line aft
 
 In this project, we tried to show some design philosopy of UNIX including:  
 
-1. Rule of Composition (can interact with other programs like xsel and grep through pipe)  
+1. Rule of Composition (can easily interact with other programs through pipe)  
 2. Rule of Silence (does not print unnecessary output)  
 
 ## Contributor
