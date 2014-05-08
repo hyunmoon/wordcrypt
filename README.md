@@ -1,12 +1,13 @@
 ECE2524 SP14 Final Project- WordCrypt  
 
-## Introduction
+## Introduction:
 Wordcrypt is a simple yet powerful string encryption tool for text files.  
 It can encrypt or decrypt entire text files.
 It is also capable of encrypting or decrypting specific strings or lines in the text.  
 
-## Required Library
-In order to run wordcrypt, you need PyCrypto library installed.  
+## Requirement
+In order to run wordcrypt, you need Python v2.x and PyCrypto library installed.  
+To install PyCrypto libarary,
 Linux - Ubuntu based:  
     `$ sudo apt-get install python-crypto`
     
@@ -41,7 +42,7 @@ To save the result in clipboard, add the following at the end of the command lin
     (This requires xsel. To install, type ` sudo apt-get install xsel `)  
 
 	
-## Note:
+## Description:
 This project has been inspired by a scene in the movie "Inception"
 
 ![alt tag](https://lh6.googleusercontent.com/-0Y3geyRNkno/U2llsZB5_sI/AAAAAAAAAjE/g10k74Zp2hc/w587-h450-no/Resizedd_capture_001.png)
