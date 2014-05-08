@@ -50,13 +50,13 @@ To save the result in clipboard, add the following at the end of the command lin
     `| xsel -ib`  
     
 It requires installation of xsel. To install,  
-
 Linux - Ubuntu based:  
     `$ sudo apt-get install xsel`
     
 Linux - RedHat based:  
     `$ sudo yum install xsel`
 
+  
   
 To check the encrypted strings, add the following at the end of command line after a space  
     `| grep '\_\_\[.*\]\_\_'`  
@@ -66,7 +66,7 @@ To check the encrypted strings, add the following at the end of command line aft
 
 In this project, we tried to show some design philosopy of UNIX including:  
 
-1. Rule of Composition (can interact with other programs through pipe)  
+1. Rule of Composition (can interact with other programs like xsel and grep through pipe)  
 2. Rule of Silence (does not print unnecessary output)  
 
 ## Contributor
