@@ -2,16 +2,14 @@ ECE2524 SP14 Final Project- WordCrypt
 
 ## Introduction
 Wordcrypt is a simple yet powerful string encryption tool for text files.  
-It can encrypt or decrypt entire text files.  
-It is also capable of encrypting or decrypting specific strings or lines in the text.  
+It can encrypt or decrypt some specific words, lines or the entire text in a text file.  
 
-This project has been inspired by a scene in the movie "Inception"
+This project has been inspired by a scene in the movie "Inception"  
 ![alt tag](https://lh6.googleusercontent.com/-0Y3geyRNkno/U2llsZB5_sI/AAAAAAAAAjE/g10k74Zp2hc/w587-h450-no/Resizedd_capture_001.png)
 
 Wordcrypt uses AES-128 encryption algorithm which is known to be one of the safest  
 and strongest encryption algorithm.  
-Also, even if there are multiple occurences of strings, each strings will be  
-encrypted to different strings so the reader can't guess about them.  
+It will come handy for maintaining a confidential document.
 
 ## Requirement
 In order to run wordcrypt, you need Python v2.x and PyCrypto library installed.  
@@ -38,8 +36,15 @@ Option:
     5. `-l : Encrypt the lines containing the specific string ex) -l "str1" "str2" "str3"`  
     6. `-i : Input file (if no -i switch, the program will read from the standard input)`  
     7. `-o : Outout file (if no -o switch, the program will write to the standard output)`  
-	
-     
+
+For Example,  
+If you would like to encrypt some specific phone numbers contained in a text file you can do:  
+`python wordcrypt.py -s "540-111-2222" "540-333-4444" -i input.txt -o output.txt`
+
+If you would like to encrypt every line that contains phone numbers you can do:  
+`python wordcrypt.py -l "phone" -i input.txt -o output.txt`
+
+
 ## Useful Commands
 To highlight the encrypted part, add the following at the end of command line after a space  
     `| grep '\_\_\[.*\]\_\_'`  
