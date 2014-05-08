@@ -39,10 +39,10 @@ Option:
 
 For Example,  
 If you would like to encrypt some specific phone numbers contained in a text file you can do:  
-`python wordcrypt.py -s "540-111-2222" "540-333-4444" -i input.txt -o output.txt`
+`python wordcrypt.py -s "540-9876-5432" "571-1111-2222" -i sample.txt`
 
 If you would like to encrypt every line that contains phone numbers you can do:  
-`python wordcrypt.py -l "phone" -i input.txt -o output.txt`
+`python wordcrypt.py -l "Phone" -i sample.txt`
 
 
 ## Useful Commands
