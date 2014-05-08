@@ -8,8 +8,7 @@ This project has been inspired by a scene in the movie "Inception"
 ![alt tag](https://lh6.googleusercontent.com/-0Y3geyRNkno/U2llsZB5_sI/AAAAAAAAAjE/g10k74Zp2hc/w587-h450-no/Resizedd_capture_001.png)
 
 Wordcrypt uses AES-128 encryption algorithm which is known to be one of the safest  
-and strongest encryption algorithm.  
-It will come handy for maintaining a confidential document.
+and strongest encryption algorithm. It will come handy when maintaining a confidential document.
 
 ## Requirement
 In order to run wordcrypt, you need Python v2.x and PyCrypto library installed.  
