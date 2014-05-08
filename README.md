@@ -48,7 +48,16 @@ If you would like to encrypt every line that contains phone numbers you can do:
 ## Useful Commands
 To save the result in clipboard, add the following at the end of the command line after a space  
     `| xsel -ib`  
-    (This requires xsel. To install, type ` sudo apt-get install xsel `)  
+    
+It requires installation of xsel. To install,  
+
+Linux - Ubuntu based:  
+    `$ sudo apt-get install xsel`
+    
+Linux - RedHat based:  
+    `$ sudo yum install xsel`
+
+  
 To check the encrypted strings, add the following at the end of command line after a space  
     `| grep '\_\_\[.*\]\_\_'`  
       
