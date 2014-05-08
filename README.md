@@ -2,8 +2,16 @@ ECE2524 SP14 Final Project- WordCrypt
 
 ## Introduction
 Wordcrypt is a simple yet powerful string encryption tool for text files.  
-It can encrypt or decrypt entire text files.
+It can encrypt or decrypt entire text files.  
 It is also capable of encrypting or decrypting specific strings or lines in the text.  
+
+This project has been inspired by a scene in the movie "Inception"
+![alt tag](https://lh6.googleusercontent.com/-0Y3geyRNkno/U2llsZB5_sI/AAAAAAAAAjE/g10k74Zp2hc/w587-h450-no/Resizedd_capture_001.png)
+
+Wordcrypt uses AES-128 encryption algorithm which is known to be one of the safest  
+and strongest encryption algorithm.  
+Also, even if there are multiple occurences of strings, each strings will be  
+encrypted to different strings so the reader can't guess about them.  
 
 ## Requirement
 In order to run wordcrypt, you need Python v2.x and PyCrypto library installed.  
@@ -32,7 +40,6 @@ Option:
     7. `-o : Outout file (if no -o switch, the program will write to the standard output)`  
 	
      
-     
 ## Useful Commands
 To highlight the encrypted part, add the following at the end of command line after a space  
     `| grep '\_\_\[.*\]\_\_'`  
@@ -42,19 +49,7 @@ To save the result in clipboard, add the following at the end of the command lin
     (This requires xsel. To install, type ` sudo apt-get install xsel `)  
 
 	
-## Description
-This project has been inspired by a scene in the movie "Inception"
-
-![alt tag](https://lh6.googleusercontent.com/-0Y3geyRNkno/U2llsZB5_sI/AAAAAAAAAjE/g10k74Zp2hc/w587-h450-no/Resizedd_capture_001.png)
-
-
-There are many tools out there that encrypts the file itself.  
-But what if you want to encrypt only the key pieces of information?  
-
-Wordcrypt uses AES-128 encryption algorithm which is known to be one of the safest  
-and strongest encryption algorithm.  
-Also, even if there are multiple occurences of strings, each strings will be  
-encrypted to different strings so the reader can't guess about them.  
+## Design Philosophy
 
 In this project, we tried to show some design philosopy of UNIX including:  
 
