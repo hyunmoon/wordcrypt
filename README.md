@@ -3,6 +3,7 @@
 Wordcrypt is a simple yet powerful string encryption tool for text files.  
 It can encrypt or decrypt some specific words, lines or the entire text in a text file.  
 
+
 This project has been inspired by a scene in the movie "Inception"  
 ![alt tag](https://lh6.googleusercontent.com/-0Y3geyRNkno/U2llsZB5_sI/AAAAAAAAAjE/g10k74Zp2hc/w587-h450-no/Resizedd_capture_001.png)
 
