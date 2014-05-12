@@ -14,7 +14,7 @@ and strongest way to encrypt. It will come handy when maintaining a confidential
 
 
 ## Requirement
-In order to run wordcrypt, you need Python v2.x and PyCrypto library installed.  
+In order to run wordcrypt, you need [ Python v2.x ] and [ PyCrypto library ] installed.  
 To install PyCrypto libarary,  
 Linux - Ubuntu based:  
     `$ sudo apt-get install python-crypto`
@@ -47,6 +47,8 @@ If you would like to encrypt some specific phone numbers contained in a text fil
 If you would like to encrypt every line that contains phone numbers you can do:  
 `python wordcrypt.py -l "Phone" -i sample.txt`
 
+Important:
+Currently, handling specific strings or lines is supported for encryption only.  
 
 ## Useful Commands
 To save the result in clipboard, add the following at the end of the command line after a space  
@@ -66,7 +68,7 @@ To check the encrypted strings, add the following at the end of command line aft
 	
 ## Design Philosophy
 
-In this project, we tried to show some design philosopy of UNIX including:  
+In this project, we tried to show some design philosopy of UNIX including (but not limited to):  
 
 1. Rule of Composition (can easily interact with other programs through pipe)  
 2. Rule of Silence (does not print unnecessary output)  
