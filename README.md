@@ -47,7 +47,7 @@ If you would like to encrypt some specific phone numbers contained in a text fil
 If you would like to encrypt every line that contains phone numbers you can do:  
 `python wordcrypt.py -l "Phone" -i sample.txt`
 
-Important:
+Important:  
 Currently, handling specific strings or lines is supported for encryption only.  
 
 ## Useful Commands
