@@ -14,13 +14,10 @@ and strongest way to encrypt. It will come handy when maintaining a confidential
 
 
 ## Requirement
-In order to run wordcrypt, you need [ Python v2.x ] and [ PyCrypto library ] installed.  
+In order to run wordcrypt, you need [ Python v2.6+ ] and [ PyCrypto library ] installed.  
 To install PyCrypto libarary,  
-Linux - Ubuntu based:  
-    `$ sudo apt-get install python-crypto`
-    
-Linux - RedHat based:  
-    `$ sudo yum install python-crypto`
+Linux - Ubuntu based:  `$ sudo apt-get install python-crypto`   
+Linux - RedHat based:  `$ sudo yum install python-crypto`
     
 Windows:  
     1. Go to http://www.voidspace.org.uk/python/modules.shtml#pycrypto  
@@ -51,19 +48,17 @@ Important:
 Currently, handling specific strings or lines is supported for encryption only.  
 
 ## Useful Commands
-To save the result in clipboard, add the following at the end of the command line after a space  
+To **save** the result in **clipboard**, add the following at the end of the command line after a space  
     `| xsel -ib`  
     
 It requires installation of xsel. To install,  
-Linux - Ubuntu based:  
-    `$ sudo apt-get install xsel`    
-Linux - RedHat based:  
-    `$ sudo yum install xsel`
+Linux - Ubuntu based:  `$ sudo apt-get install xsel`    
+Linux - RedHat based:  `$ sudo yum install xsel`
 
   
   
-To check the encrypted strings, add the following at the end of command line after a space  
-    `| grep '\_\_\[.*\]\_\_'`  
+To **highlight** the encrypted strings, add the following at the end of command line after a space  
+    `| grep --color -E '\_\_\[.*\]\_\_|$'`
       
 	
 ## Design Philosophy
